@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "fields": [
+    {
+      "field": "API_KEY",
+      "displayName": "Stripe API Key",
+      "type": "String",
+      "minLength": 4,
+      "maxLength": 60,
+      "required": true,
+      "description": "Stripe API Key",
+      "example": "sk_test_4eC39HqLyjWDarjtT1zdp7dc",
+      "helpSection": "You can view and manage your API keys in the Stripe Dashboard."
+    },
+    {
+      "field": "AUTH_TYPE",
+      "displayName": "Stripe Auth Type",
+      "type": "String",
+      "minLength": 4,
+      "maxLength": 60,
+      "required": true,
+      "description": "Stripe API Auth Type",
+      "default": "API_KEY",
+      "example": "API_KEY",
+      "helpSection": ""
+    },
+    {
+      "field": "SERVER_URL",
+      "displayName": "Stripe Server URL",
+      "type": "String",
+      "minLength": 4,
+      "maxLength": 60,
+      "required": true,
+      "description": "Stripe API Server URL",
+      "default": "https://api.stripe.com",
+      "example": "https://api.stripe.com",
+      "helpSection": "Use the default value https://api.stripe.com"
+    }
+  ]
+}
