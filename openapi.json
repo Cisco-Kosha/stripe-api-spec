@@ -237,6 +237,151 @@
           "treasury"
         ]
       },
+      "account_bacs_debit_payments_settings": {
+        "description": "",
+        "properties": {
+          "display_name": {
+            "description": "The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct Debit, this will appear on the mandate, and as the statement descriptor.",
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "title": "AccountBacsDebitPaymentsSettings",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "account_branding_settings": {
+        "description": "",
+        "properties": {
+          "icon": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/file"
+              }
+            ],
+            "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px.",
+            "nullable": true,
+            "x-expansionResources": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/file"
+                }
+              ]
+            }
+          },
+          "logo": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/file"
+              }
+            ],
+            "description": "(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account's name next to it if provided. Must be at least 128px x 128px.",
+            "nullable": true,
+            "x-expansionResources": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/file"
+                }
+              ]
+            }
+          },
+          "primary_color": {
+            "description": "A CSS hex color value representing the primary branding color for this account",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "secondary_color": {
+            "description": "A CSS hex color value representing the secondary branding color for this account",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "AccountBrandingSettings",
+        "type": "object",
+        "x-expandableFields": [
+          "icon",
+          "logo"
+        ]
+      },
+      "account_payments_settings": {
+        "description": "",
+        "properties": {
+          "statement_descriptor": {
+            "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "statement_descriptor_kana": {
+            "description": "The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only)",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "statement_descriptor_kanji": {
+            "description": "The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only)",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "statement_descriptor_prefix_kana": {
+            "description": "The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kana` specified on the charge. `statement_descriptor_prefix_kana` is useful for maximizing descriptor space for the dynamic portion.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "statement_descriptor_prefix_kanji": {
+            "description": "The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kanji` specified on the charge. `statement_descriptor_prefix_kanji` is useful for maximizing descriptor space for the dynamic portion.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "AccountPaymentsSettings",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "account_payout_settings": {
+        "description": "",
+        "properties": {
+          "debit_negative_balances": {
+            "description": "A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances) documentation for details. Default value is `false` for Custom accounts, otherwise `true`.",
+            "type": "boolean"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/transfer_schedule"
+          },
+          "statement_descriptor": {
+            "description": "The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "debit_negative_balances",
+          "schedule"
+        ],
+        "title": "AccountPayoutSettings",
+        "type": "object",
+        "x-expandableFields": [
+          "schedule"
+        ]
+      },
       "account_tos_acceptance": {
         "description": "",
         "properties": {
@@ -1157,6 +1302,49 @@
           "verification"
         ]
       },
+      "legal_entity_person_verification": {
+        "description": "",
+        "properties": {
+          "additional_document": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/legal_entity_person_verification_document"
+              }
+            ],
+            "description": "A document showing address, either a passport, local ID card, or utility bill from a well-known utility company.",
+            "nullable": true
+          },
+          "details": {
+            "description": "A user-displayable string describing the verification state for the person. For example, this may say \"Provided identity information could not be verified\".",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "details_code": {
+            "description": "One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`, `document_id_number_mismatch`, `document_name_mismatch`, `document_nationality_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the verification state for the person.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "document": {
+            "$ref": "#/components/schemas/legal_entity_person_verification_document"
+          },
+          "status": {
+            "description": "The state of verification for the person. Possible values are `unverified`, `pending`, or `verified`.",
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "LegalEntityPersonVerification",
+        "type": "object",
+        "x-expandableFields": [
+          "additional_document",
+          "document"
+        ]
+      },
       "account_unification_account_controller": {
         "description": "",
         "properties": {
@@ -1255,6 +1443,72 @@
         "x-expandableFields": [
           "alternatives",
           "errors"
+        ]
+      },
+      "account_card_issuing_settings": {
+        "description": "",
+        "properties": {
+          "tos_acceptance": {
+            "$ref": "#/components/schemas/card_issuing_account_terms_of_service"
+          }
+        },
+        "title": "AccountCardIssuingSettings",
+        "type": "object",
+        "x-expandableFields": [
+          "tos_acceptance"
+        ]
+      },
+      "account_card_payments_settings": {
+        "description": "",
+        "properties": {
+          "decline_on": {
+            "$ref": "#/components/schemas/account_decline_charge_on"
+          },
+          "statement_descriptor_prefix": {
+            "description": "The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "statement_descriptor_prefix_kana": {
+            "description": "The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kana` specified on the charge. `statement_descriptor_prefix_kana` is useful for maximizing descriptor space for the dynamic portion.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "statement_descriptor_prefix_kanji": {
+            "description": "The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kanji` specified on the charge. `statement_descriptor_prefix_kanji` is useful for maximizing descriptor space for the dynamic portion.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "AccountCardPaymentsSettings",
+        "type": "object",
+        "x-expandableFields": [
+          "decline_on"
+        ]
+      },
+      "account_dashboard_settings": {
+        "description": "",
+        "properties": {
+          "display_name": {
+            "description": "The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "timezone": {
+            "description": "The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "AccountDashboardSettings",
+        "type": "object",
+        "x-expandableFields": [
+
         ]
       },
       "person": {
@@ -1452,6 +1706,344 @@
         ],
         "x-resourceId": "person"
       },
+      "person_future_requirements": {
+        "description": "",
+        "properties": {
+          "alternatives": {
+            "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+            "items": {
+              "$ref": "#/components/schemas/account_requirements_alternative"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "currently_due": {
+            "description": "Fields that need to be collected to keep the person's account enabled. If not collected by the account's `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash, and may immediately become `past_due`, but the account may also be given a grace period depending on the account's enablement state prior to transition.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "errors": {
+            "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+            "items": {
+              "$ref": "#/components/schemas/account_requirements_error"
+            },
+            "type": "array"
+          },
+          "eventually_due": {
+            "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and the account's `future_requirements[current_deadline]` becomes set.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "past_due": {
+            "description": "Fields that weren't collected by the account's `requirements.current_deadline`. These fields need to be collected to enable the person's account. New fields will never appear here; `future_requirements.past_due` will always be a subset of `requirements.past_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "pending_verification": {
+            "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due` or `currently_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "currently_due",
+          "errors",
+          "eventually_due",
+          "past_due",
+          "pending_verification"
+        ],
+        "title": "PersonFutureRequirements",
+        "type": "object",
+        "x-expandableFields": [
+          "alternatives",
+          "errors"
+        ]
+      },
+      "person_relationship": {
+        "description": "",
+        "properties": {
+          "director": {
+            "description": "Whether the person is a director of the account's legal entity. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.",
+            "nullable": true,
+            "type": "boolean"
+          },
+          "executive": {
+            "description": "Whether the person has significant responsibility to control, manage, or direct the organization.",
+            "nullable": true,
+            "type": "boolean"
+          },
+          "owner": {
+            "description": "Whether the person is an owner of the account’s legal entity.",
+            "nullable": true,
+            "type": "boolean"
+          },
+          "percent_ownership": {
+            "description": "The percent owned by the person of the account's legal entity.",
+            "nullable": true,
+            "type": "number"
+          },
+          "representative": {
+            "description": "Whether the person is authorized as the primary representative of the account. This is the person nominated by the business to provide information about themselves, and general information about the account. There can only be one representative at any given time. At the time the account is created, this person should be set to the person responsible for opening the account.",
+            "nullable": true,
+            "type": "boolean"
+          },
+          "title": {
+            "description": "The person's title (e.g., CEO, Support Engineer).",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "PersonRelationship",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "person_requirements": {
+        "description": "",
+        "properties": {
+          "alternatives": {
+            "description": "Fields that are due and can be satisfied by providing the corresponding alternative fields instead.",
+            "items": {
+              "$ref": "#/components/schemas/account_requirements_alternative"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "currently_due": {
+            "description": "Fields that need to be collected to keep the person's account enabled. If not collected by the account's `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "errors": {
+            "description": "Fields that are `currently_due` and need to be collected again because validation or verification failed.",
+            "items": {
+              "$ref": "#/components/schemas/account_requirements_error"
+            },
+            "type": "array"
+          },
+          "eventually_due": {
+            "description": "Fields that need to be collected assuming all volume thresholds are reached. As they become required, they appear in `currently_due` as well, and the account's `current_deadline` becomes set.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "past_due": {
+            "description": "Fields that weren't collected by the account's `current_deadline`. These fields need to be collected to enable the person's account.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "pending_verification": {
+            "description": "Fields that may become required depending on the results of verification or review. Will be an empty array unless an asynchronous verification is pending. If verification fails, these fields move to `eventually_due`, `currently_due`, or `past_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "currently_due",
+          "errors",
+          "eventually_due",
+          "past_due",
+          "pending_verification"
+        ],
+        "title": "PersonRequirements",
+        "type": "object",
+        "x-expandableFields": [
+          "alternatives",
+          "errors"
+        ]
+      },
+      "address": {
+        "description": "",
+        "properties": {
+          "city": {
+            "description": "City, district, suburb, town, or village.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "line1": {
+            "description": "Address line 1 (e.g., street, PO Box, or company name).",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "line2": {
+            "description": "Address line 2 (e.g., apartment, suite, unit, or building).",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "postal_code": {
+            "description": "ZIP or postal code.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "state": {
+            "description": "State, county, province, or region.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "Address",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "legal_entity_japan_address": {
+        "description": "",
+        "properties": {
+          "city": {
+            "description": "City/Ward.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "description": "Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "line1": {
+            "description": "Block/Building number.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "line2": {
+            "description": "Building details.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "postal_code": {
+            "description": "ZIP or postal code.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "state": {
+            "description": "Prefecture.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "town": {
+            "description": "Town/cho-me.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "LegalEntityJapanAddress",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "legal_entity_dob": {
+        "description": "",
+        "properties": {
+          "day": {
+            "description": "The day of birth, between 1 and 31.",
+            "nullable": true,
+            "type": "integer"
+          },
+          "month": {
+            "description": "The month of birth, between 1 and 12.",
+            "nullable": true,
+            "type": "integer"
+          },
+          "year": {
+            "description": "The four-digit year of birth.",
+            "nullable": true,
+            "type": "integer"
+          }
+        },
+        "title": "LegalEntityDOB",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "legal_entity_ubo_declaration": {
+        "description": "",
+        "properties": {
+          "date": {
+            "description": "The Unix timestamp marking when the beneficial owner attestation was made.",
+            "format": "unix-time",
+            "nullable": true,
+            "type": "integer"
+          },
+          "ip": {
+            "description": "The IP address from which the beneficial owner attestation was made.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          },
+          "user_agent": {
+            "description": "The user-agent string from the browser where the beneficial owner attestation was made.",
+            "maxLength": 5000,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "LegalEntityUBODeclaration",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "legal_entity_company_verification": {
+        "description": "",
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/legal_entity_company_verification_document"
+          }
+        },
+        "required": [
+          "document"
+        ],
+        "title": "LegalEntityCompanyVerification",
+        "type": "object",
+        "x-expandableFields": [
+          "document"
+        ]
+      },
       "account_requirements": {
         "description": "",
         "properties": {
@@ -1525,6 +2117,145 @@
         "x-expandableFields": [
           "alternatives",
           "errors"
+        ]
+      },
+      "account_requirements_alternative": {
+        "description": "",
+        "properties": {
+          "alternative_fields_due": {
+            "description": "Fields that can be provided to satisfy all fields in `original_fields_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "original_fields_due": {
+            "description": "Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.",
+            "items": {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "alternative_fields_due",
+          "original_fields_due"
+        ],
+        "title": "AccountRequirementsAlternative",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "account_requirements_error": {
+        "description": "",
+        "properties": {
+          "code": {
+            "description": "The code for the type of error.",
+            "enum": [
+              "invalid_address_city_state_postal_code",
+              "invalid_dob_age_under_18",
+              "invalid_representative_country",
+              "invalid_street_address",
+              "invalid_tos_acceptance",
+              "invalid_value_other",
+              "verification_document_address_mismatch",
+              "verification_document_address_missing",
+              "verification_document_corrupt",
+              "verification_document_country_not_supported",
+              "verification_document_dob_mismatch",
+              "verification_document_duplicate_type",
+              "verification_document_expired",
+              "verification_document_failed_copy",
+              "verification_document_failed_greyscale",
+              "verification_document_failed_other",
+              "verification_document_failed_test_mode",
+              "verification_document_fraudulent",
+              "verification_document_id_number_mismatch",
+              "verification_document_id_number_missing",
+              "verification_document_incomplete",
+              "verification_document_invalid",
+              "verification_document_issue_or_expiry_date_missing",
+              "verification_document_manipulated",
+              "verification_document_missing_back",
+              "verification_document_missing_front",
+              "verification_document_name_mismatch",
+              "verification_document_name_missing",
+              "verification_document_nationality_mismatch",
+              "verification_document_not_readable",
+              "verification_document_not_signed",
+              "verification_document_not_uploaded",
+              "verification_document_photo_mismatch",
+              "verification_document_too_large",
+              "verification_document_type_not_supported",
+              "verification_failed_address_match",
+              "verification_failed_business_iec_number",
+              "verification_failed_document_match",
+              "verification_failed_id_number_match",
+              "verification_failed_keyed_identity",
+              "verification_failed_keyed_match",
+              "verification_failed_name_match",
+              "verification_failed_other",
+              "verification_failed_residential_address",
+              "verification_failed_tax_id_match",
+              "verification_failed_tax_id_not_issued",
+              "verification_missing_executives",
+              "verification_missing_owners",
+              "verification_requires_additional_memorandum_of_associations"
+            ],
+            "type": "string",
+            "x-stripeBypassValidation": true
+          },
+          "reason": {
+            "description": "An informative message that indicates the error type and provides additional details about the error.",
+            "maxLength": 5000,
+            "type": "string"
+          },
+          "requirement": {
+            "description": "The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.",
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "reason",
+          "requirement"
+        ],
+        "title": "AccountRequirementsError",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "account_sepa_debit_payments_settings": {
+        "description": "",
+        "properties": {
+          "creditor_id": {
+            "description": "SEPA creditor identifier that identifies the company making the payment.",
+            "maxLength": 5000,
+            "type": "string"
+          }
+        },
+        "title": "AccountSepaDebitPaymentsSettings",
+        "type": "object",
+        "x-expandableFields": [
+
+        ]
+      },
+      "account_treasury_settings": {
+        "description": "",
+        "properties": {
+          "tos_acceptance": {
+            "$ref": "#/components/schemas/account_terms_of_service"
+          }
+        },
+        "title": "AccountTreasurySettings",
+        "type": "object",
+        "x-expandableFields": [
+          "tos_acceptance"
         ]
       },
       "card": {
