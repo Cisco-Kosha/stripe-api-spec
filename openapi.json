@@ -2943,30 +2943,17 @@
         ],
         "x-resourceId": "file_link"
       }
-    },
-    "securitySchemes": {
-      "basicAuth": {
-        "description": "Basic HTTP authentication. Allowed headers-- Authorization: Basic <api_key> | Authorization: Basic <base64 hash of `api_key:`>",
-        "scheme": "basic",
-        "type": "http"
-      },
-      "bearerAuth": {
-        "bearerFormat": "auth-scheme",
-        "description": "Bearer HTTP authentication. Allowed headers-- Authorization: Bearer <api_key>",
-        "scheme": "bearer",
-        "type": "http"
-      }
     }
   },
   "info": {
     "contact": {
-      "email": "dev-platform@stripe.com",
-      "name": "Stripe Dev Platform Team",
+      "email": "",
+      "name": "Kosha Dev Team",
       "url": "https://stripe.com"
     },
-    "description": "The Stripe REST API. Please see https://stripe.com/docs/api for more details.",
-    "termsOfService": "https://stripe.com/us/terms/",
-    "title": "Stripe API",
+    "description": "The Kosha Stripe Connector REST API. Please see https://stripe.com/docs/api for more details.",
+    "termsOfService": "",
+    "title": "Kosha Stripe Connector API Spec",
     "version": "2022-11-15",
     "x-stripeSpecFilename": "spec3"
   },
@@ -3069,21 +3056,6 @@
             "style": "form"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "encoding": {
-              },
-              "schema": {
-                "additionalProperties": false,
-                "properties": {
-                },
-                "type": "object"
-              }
-            }
-          },
-          "required": false
-        },
         "responses": {
           "200": {
             "content": {
@@ -5230,19 +5202,9 @@
       }
     }
   },
-  "security": [
-    {
-      "basicAuth": [
-        ]
-    },
-    {
-      "bearerAuth": [
-        ]
-    }
-  ],
   "servers": [
     {
-      "url": "https://api.stripe.com/"
+      "url": "/"
     }
   ]
 }
