@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "fields": [
     {
-      "field": "API_KEY",
+      "field": "BEARER_TOKEN",
       "displayName": "Stripe API Key",
       "type": "String",
       "minLength": 4,
@@ -20,8 +20,8 @@
       "maxLength": 60,
       "required": true,
       "description": "Stripe API Auth Type",
-      "default": "API_KEY",
-      "example": "API_KEY",
+      "default": "BEARER_TOKEN",
+      "example": "BEARER_TOKEN",
       "helpSection": ""
     },
     {
