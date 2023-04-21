@@ -1,49 +1,24 @@
 # Kosha Stripe Connector
 
-Stripe is an online payment processing and commerce solution for internet businesses of all sizes.
+![stripe-logo](images/stripe-logo.png)
 
-The connector APIs allow you to perform 'RESTful' operations such as reading, modifying, adding or deleting data from your projects. The APIs also support Cross-Origin Resource Sharing (CORS).
+Stripe is a payment processing platform that powers payments for online and in-person retailers, subscriptions businesses, software platforms and marketplaces.
 
+The Kosha Stripe connector enables you to perform REST API operations from the Stripe Payment Intents API in your Kosha workflow or custom application. Using the Kosha Stripe connector, you can directly access the Stripe platform to build workflows that can track a payment from creation through checkout, and trigger additional authentication steps when required.
 
+## Useful Actions
 
-This Connector API exposes REST API endpoints to perform any operations on OpenAI's APIs in a simple, quick and intuitive fashion.
+You can use the Kosha Stripe connector to perform key actions from the Stripe Payment Intents API.
 
-It describes various API operations, related request and response structures, and error codes.
+See the Kosha Stripe connector [API specification](openapi.json) for details. 
 
-## Build
+* Return a list of PaymentIntents
+* Create PaymentIntents 
 
-To build the project binary, run
-```
-    go build -o main .
+## Example Usage
 
-```
+< tdk >
 
-## Run locally
+## Authentication
 
-To run the project, simply provide env variables to supply the API key and Stripe domain name.
-
-
-```bash
-go build -o main .
-API_KEY=<API_KEY> AUTH_TYPE=<AUTH_TYPE> SERVER_URL=<SERVER_URL> ./main
-```
-
-This will start a worker and expose the API on port `8015` on the host machine
-
-Swagger docs is available at `https://localhost:8015/docs`
-
-## Generating Swagger Documentation
-
-To generate `swagger.json` and `swagger.yaml` files based on the API documentation, simple run -
-
-```bash
-go install github.com/swaggo/swag/cmd/swag@latest
-swag init -g main.go --parseDependency --parseInternal
-```
-
-To generate OpenAPISpec version 3 from Swagger 2.0 specification, run -
-
-```bash
-npm i api-spec-converter
-npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=json ./docs/swagger.json > openapi.json
-```
+To authenticate when provisioning the Kosha Stripe connector, you need your Stripe API key. You can retrieve your API key from the [Stripe dashboard](https://dashboard.stripe.com/login).
