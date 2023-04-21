@@ -4,7 +4,7 @@
 
 Stripe is a payment processing platform that powers payments for online and in-person retailers, subscriptions businesses, software platforms and marketplaces.
 
-The Kosha Stripe connector enables you to perform REST API operations from the Stripe Payment Intents API in your Kosha workflow or custom application. Using the Kosha Stripe connector, you can directly access the Stripe platform to build workflows that can track a payment from creation through checkout, and trigger additional authentication steps when required.
+The Kosha Stripe connector enables you to perform REST API operations from the Stripe Payment Intents API in your Kosha workflow or custom application. Using the Kosha Stripe connector, you can directly access the Stripe platform to build workflows that can create payments and send that data to external services.
 
 ## Useful Actions
 
