@@ -17,7 +17,15 @@ See the Kosha Stripe connector [API specification](openapi.json) for details.
 
 ## Example Usage
 
-< tdk >
+The following example shows how to create a PaymentIntent
+
+```
+curl https://api.stripe.com/v1/payment_intents \
+  -u "sk_test_4eC39HqLyjWDarjtT1zdp7dc:" \
+  -d amount=1099 \
+  -d currency=usd \
+  -d "payment_method_types[]"=card
+```
 
 ## Authentication
 
